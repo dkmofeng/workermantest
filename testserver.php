@@ -37,9 +37,11 @@ $tcp_worker->onMessage = function($connection, $data)
             }
          break;
         default:
-            return false;
+            $connection->send(json_encode(['type'=>'sysmessage','text'=>'无效数据！','id'=>$connection->id]));
+
          break;
     }
+    return false;
 };
 
 // 当客户端发来数据时
