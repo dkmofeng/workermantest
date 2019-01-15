@@ -36,6 +36,9 @@ $tcp_worker->onMessage = function($connection, $data)
                 $connectionrow->send(json_encode(['type'=>'usermessage','text'=>$connection->username.'说'.$messagetext]));
             }
          break;
+        default:
+            return false;
+         break;
     }
 };
 
