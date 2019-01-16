@@ -1,7 +1,8 @@
 <?php
+
+require_once __DIR__ . '/Autoloader.php';
 use Workerman\Worker;
 use Workerman\Lib\Timer;
-require_once __DIR__ . '/Autoloader.php';
 
 $tcp_worker = new Worker("ws://0.0.0.0:2347");
 
@@ -64,7 +65,7 @@ $tcp_worker->onWorkerStart = function($worker)
 
     global $userlimit;
     $userlimit=0;
-    Timer:add(50,function() use($worker){
+    Timer::add(50,function() use($worker){
     $connections=$worker->connections;
     if(!empty($connections)){
         foreach($connections as $connection){
