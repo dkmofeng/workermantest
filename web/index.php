@@ -12,8 +12,10 @@
     function ping(){
         var jsondata={'type':'pong'};
         websocket.send(jsondata);
+        console.log('ping log')
         setTimeout('ping()',10);
     }
+    ping();
     function sendmessage() {
        var txt= document.getElementById('text').value;
        if(txt!=''){
