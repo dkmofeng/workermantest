@@ -13,8 +13,10 @@ $tcp_worker->count =2;
 $tcp_worker->onMessage = function($connection, $data)
 {
     $data=str_replace('\n','',$data);
-    $message=json_decode($data,true);
     ob_start();
+    var_dump($data);
+    $message=json_decode($data,true);
+
     var_dump($message);
     $connection->send(json_encode(['type'=>'sysmessage','text'=>ob_get_clean()]));
     if(empty($data)||!is_array($message)){
