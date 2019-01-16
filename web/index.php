@@ -6,7 +6,7 @@
     websocket.onmessage=function(e){
         console.log(e);
     }
-    websocket.close=function(e){
+    websocket.onclose=function(e){
         console.log(e);
     }
     function ping(){
