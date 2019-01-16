@@ -38,8 +38,8 @@ $tcp_worker->onMessage = function($connection, $data)
             $connection->send(json_encode(['type'=>'sysmessage','text'=>'登陆成功','id'=>$connection->id]));
          break;
         case 'sayall':
-            $messagetext=$message['message'];
-
+            $connection=$message['message'];
+            $connectionrow->send(json_encode(['type'=>'usermessage','text'=>$connection->username.'说'.$messagetext]));
             foreach ($tcp_worker->connections as $connectionrow){
                 $connectionrow->send(json_encode(['type'=>'usermessage','text'=>$connection->username.'说'.$messagetext]));
             }
