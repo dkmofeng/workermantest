@@ -39,7 +39,7 @@ $tcp_worker->onMessage = function($connection, $data)
          break;
         case 'sayall':
             $connection=$message['message'];
-            $connection->send(json_encode(['type'=>'usermessage','text'=>$connection->username.'说:'.$messagetext]));
+            $connection->send(json_encode(['type'=>'usermessage','text'=>'说:'.$messagetext]));
             //foreach ($tcp_worker->connections as $connectionrow){
              //   $connectionrow->send(json_encode(['type'=>'usermessage','text'=>$connection->username.'说:'.$messagetext]));
           //  }
