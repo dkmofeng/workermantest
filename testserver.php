@@ -23,25 +23,25 @@ $tcp_worker->onMessage = function($connection, $data)
     switch ($message['type']){
         case 'pong':
              $connection->lastsendtime=time();
-               $connection->send(json_encode(['type'=>'sysmessage','text'=>$connection->lastsendtime]));
+               //$connection->send(json_encode(['type'=>'sysmessage','text'=>$connection->lastsendtime]));
         break;
         case 'close':
 
             foreach ($tcp_worker->connections as $connectionrow){
-                $connectionrow->send(json_encode(['type'=>'sysmessage','text'=>$connection->username.'已经离开']));
+                $connectionrow->send(json_encode(['type'=>'sysmessage','text'=>$connection->username.'已经离开'],JSON_UNESCAPED_UNICODE));
             }
             $connection->close();
             break;
         case 'login':
             $username=$message['username'];
             $connection->username=$username;
-            $connection->send(json_encode(['type'=>'sysmessage','text'=>'登陆成功','id'=>$connection->id]));
+            $connection->send(json_encode(['type'=>'sysmessage','text'=>'登陆成功','id'=>$connection->id],JSON_UNESCAPED_UNICODE));
          break;
         case 'sayall':
             $messagetext=$message['message'];
-            $connection->send(json_encode(['type'=>'usermessage','text'=>$connection->username.'说:'.$messagetext]));
+            $connection->send(json_encode(['type'=>'usermessage','text'=>$connection->username.'说:'.$messagetext],JSON_UNESCAPED_UNICODE));
             foreach ($tcp_worker->connections as $connectionrow){
-                $connectionrow->send(json_encode(['type'=>'usermessage','text'=>$connection->username.'说:'.$messagetext]));
+                $connectionrow->send(json_encode(['type'=>'usermessage','text'=>$connection->username.'说:'.$messagetext],JSON_UNESCAPED_UNICODE));
             }
          break;
         default:
@@ -62,7 +62,7 @@ $tcp_worker->onConnect = function($connection)
     $connection->lastsendtime=time();
     $connection->username='游客'.$userlimit;
     foreach ($tcp_worker->connections as $connectionrow){
-        $connectionrow->send(json_encode(['type'=>'sysmessage','text'=>$connection->username.'加入会话']));
+        $connectionrow->send(json_encode(['type'=>'sysmessage','text'=>$connection->username.'加入会话'],JSON_UNESCAPED_UNICODE));
     }
 };
 
@@ -83,7 +83,7 @@ $tcp_worker->onWorkerStart = function($worker)
                 continue;
             }
             if(time()-$connection->lastsendtime>60){
-                $connection->send(json_encode(['type'=>'sysmessage','text'=>$connection->lastsendtime]));
+              //  $connection->send(json_encode(['type'=>'sysmessage','text'=>$connection->lastsendtime]));
                 $connection->close();
             }
         }
