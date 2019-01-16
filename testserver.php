@@ -71,7 +71,7 @@ $tcp_worker->onWorkerStart = function($worker) use($tcp_worker)
 
     global $userlimit;
     $userlimit=0;
-    Timer::add(50,function() use($worker){
+    Timer::add(3,function() use($worker){
     $connections=$worker->connections;
     if(!empty($connections)){
         foreach($connections as $connection){
@@ -82,7 +82,7 @@ $tcp_worker->onWorkerStart = function($worker) use($tcp_worker)
                 $connection->lastsendtime=time();
                 continue;
             }
-            if(time()-$connection->lastsendtime>60){
+            if(time()-$connection->lastsendtime>9){
                 foreach ($tcp_worker->connections as $connectionrow){
                     $connectionrow->send(json_encode(['type'=>'sysmessage','text'=>$connection->username.'离开了会话'],JSON_UNESCAPED_UNICODE));
                 }
