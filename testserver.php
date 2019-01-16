@@ -66,7 +66,7 @@ $tcp_worker->onConnect = function($connection) use($tcp_worker)
     }
 };
 
-$tcp_worker->onWorkerStart = function($worker)
+$tcp_worker->onWorkerStart = function($worker) use($tcp_worker)
 {
 
     global $userlimit;
@@ -83,7 +83,9 @@ $tcp_worker->onWorkerStart = function($worker)
                 continue;
             }
             if(time()-$connection->lastsendtime>60){
-              //  $connection->send(json_encode(['type'=>'sysmessage','text'=>$connection->lastsendtime]));
+                foreach ($tcp_worker->connections as $connectionrow){
+                    $connectionrow->send(json_encode(['type'=>'sysmessage','text'=>$connection->username.'离开了会话'],JSON_UNESCAPED_UNICODE));
+                }
                 $connection->close();
             }
         }
