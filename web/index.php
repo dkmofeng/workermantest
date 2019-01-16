@@ -1,5 +1,5 @@
 <script>
-     websocket=new WebSocket("ws://129.204.72.68:2347");
+     websocket=new WebSocket("text://129.204.72.68:2347");
     websocket.onopen=function(e){
         console.log('open success ');
         ping();
