@@ -14,7 +14,7 @@ $tcp_worker->onMessage = function($connection, $data)
 {
     ob_start();
     var_dump($data);
-    $connection->send(json_encode(['type'=>'sysmessage','text'=>ob_get_clean()));
+    $connection->send(json_encode(['type'=>'sysmessage','text'=>ob_get_clean()]));
     $message=json_decode($data,true);
     if(empty($data)||!is_array($message)){
         return false;
