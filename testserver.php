@@ -10,7 +10,7 @@ $tcp_worker = new Worker("Websocket://0.0.0.0:2347");
 $tcp_worker->count =2;
 
 // 当客户端发来数据时
-$tcp_worker->onMessage = function($connection, $data)
+$tcp_worker->onMessage = function($connection, $data)  use($tcp_worker)
 {
     $message=json_decode($data,true);
 
@@ -53,7 +53,7 @@ $tcp_worker->onMessage = function($connection, $data)
 };
 
 // 当客户端发来数据时
-$tcp_worker->onConnect = function($connection)
+$tcp_worker->onConnect = function($connection) use($tcp_worker)
 {
     global $userlimit;
     $userlimit+=1;
