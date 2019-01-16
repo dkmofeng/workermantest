@@ -8,7 +8,7 @@
         console.log(e);
     }
     websocket.onclose=function(e){
-        console.log(e);
+        console.log('已关闭连接！！')
     }
     function ping(){
         var jsondata={'type':'pong'};

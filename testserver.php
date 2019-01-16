@@ -19,6 +19,7 @@ $tcp_worker->onMessage = function($connection, $data)
     switch ($message['type']){
         case 'pong':
              $connection->lastsendtime=time();
+            $connectionrow->send(json_encode(['type'=>'sysmessage','text'=>$connection->lastsendtime]));
         break;
         case 'close':
             $connection->close();
@@ -77,6 +78,7 @@ $tcp_worker->onWorkerStart = function($worker)
                 continue;
             }
             if(time()-$connection->lastsendtime>60){
+                $connectionrow->send(json_encode(['type'=>'sysmessage','text'=>$connection->lastsendtime]));
                 $connection->close();
             }
         }
