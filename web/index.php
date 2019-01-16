@@ -11,7 +11,7 @@
         console.log('已关闭连接！！')
     }
     function ping(){
-        var jsondata={'type':'pong'};
+        var jsondata="{'type':'pong'}";
         send(jsondata)
         console.log('ping log')
         setTimeout('ping()',10000);
@@ -20,12 +20,12 @@
     function sendmessage() {
        var txt= document.getElementById('text').value;
        if(txt!=''){
-           var jsondata={'type':'sayall','message':txt};
+           var jsondata="{'type':'sayall','message':txt}";
            send(jsondata)
        }
     }
     function  send(data){
-        data=JSON.stringify(data)
+
         websocket.send(data+'/n');
     }
 </script>
