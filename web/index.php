@@ -25,7 +25,7 @@
        }
     }
     function  send(data){
-
+        console.log("websocket握手成功，发送登录数据:"+data);
         websocket.send(data);
     }
 </script>
