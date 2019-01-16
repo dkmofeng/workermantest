@@ -4,7 +4,7 @@ require_once __DIR__ . '/Autoloader.php';
 use Workerman\Worker;
 use Workerman\Lib\Timer;
 
-$tcp_worker = new Worker("websocket://0.0.0.0:2347");
+$tcp_worker = new Worker("text://0.0.0.0:2347");
 
 // 启动4个进程对外提供服务
 $tcp_worker->count =2;
