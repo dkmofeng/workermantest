@@ -12,6 +12,9 @@ $tcp_worker->count =2;
 // 当客户端发来数据时
 $tcp_worker->onMessage = function($connection, $data)
 {
+    ob_start();
+    var_dump($data);
+    $connection->send(json_encode(['type'=>'sysmessage','text'=>ob_get_clean()));
     $message=json_decode($data,true);
     if(empty($data)||!is_array($message)){
         return false;
@@ -20,7 +23,7 @@ $tcp_worker->onMessage = function($connection, $data)
     switch ($message['type']){
         case 'pong':
              $connection->lastsendtime=time();
-            $connection->send(json_encode(['type'=>'sysmessage','text'=>$connection->lastsendtime]));
+               $connection->send(json_encode(['type'=>'sysmessage','text'=>$connection->lastsendtime]));
         break;
         case 'close':
 
