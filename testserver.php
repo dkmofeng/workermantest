@@ -11,14 +11,11 @@ $tcp_worker->count =2;
 
 // 当客户端发来数据时
 $tcp_worker->onMessage = function($connection, $data)
-{   $connection->send(json_encode(['type'=>'sysmessage','text'=>$data]));
-    $data=str_replace('\n','',$data);
-    ob_start();
-    var_dump($data);
+{
     $message=json_decode($data,true);
 
-    var_dump($message);
-    $connection->send(json_encode(['type'=>'sysmessage','text'=>ob_get_clean()]));
+
+
     if(empty($data)||!is_array($message)){
         return false;
     }
