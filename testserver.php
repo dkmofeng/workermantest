@@ -64,7 +64,7 @@ $tcp_worker->onWorkerStart = function($worker)
 
     global $userlimit;
     $userlimit=0;
-    Time:add(50,function() use($worker){
+    Timer:add(50,function() use($worker){
     $connections=$worker->connections;
     if(!empty($connections)){
         foreach($connections as $connection){
