@@ -14,7 +14,7 @@
         var jsondata='{"type":"pong"}';
         send(jsondata)
         console.log('ping log')
-        setTimeout('ping()',10000);
+        setTimeout('ping()',2000);
     }
 
     function sendmessage() {
