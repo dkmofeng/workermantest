@@ -66,7 +66,7 @@ $tcp_worker->onConnect = function($connection) use($tcp_worker)
     }
 };
 
-$tcp_worker->onConnect = function($connection) use($tcp_worker)
+$tcp_worker->onClose = function($connection) use($tcp_worker)
 {
 
 
