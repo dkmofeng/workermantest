@@ -1,5 +1,6 @@
 <?php
 use Workerman\Worker;
+use Workerman\Lib\Timer;
 require_once __DIR__ . '/Autoloader.php';
 
 $tcp_worker = new Worker("ws://0.0.0.0:2347");
