@@ -20,7 +20,7 @@
     function sendmessage() {
        var txt= document.getElementById('text').value;
        if(txt!=''){
-           var jsondata='{"type":"sayall","message":txt}';
+           var jsondata='{"type":"sayall","message":"'+txt+'"}';
            send(jsondata)
        }
     }
