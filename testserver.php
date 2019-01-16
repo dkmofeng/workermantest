@@ -66,13 +66,22 @@ $tcp_worker->onConnect = function($connection) use($tcp_worker)
     }
 };
 
+$tcp_worker->onConnect = function($connection) use($tcp_worker)
+{
+
+
+    foreach ($tcp_worker->connections as $connectionrow){
+        $connectionrow->send(json_encode(['type'=>'sysmessage','text'=>$connection->username.'退出会话'],JSON_UNESCAPED_UNICODE));
+    }
+};
+
 $tcp_worker->onWorkerStart = function($worker) use ($tcp_worker)
 {
 
     global $userlimit;
     $userlimit=0;
-    Timer::add(3,function() use($tcp_worker){
-    $connections=$tcp_worker->connections;
+    Timer::add(3,function() {
+    $connections=$worker->connections;
     if(!empty($connections)){
         foreach($connections as $connection){
            // $message=['type'=>'ping'];
@@ -83,9 +92,7 @@ $tcp_worker->onWorkerStart = function($worker) use ($tcp_worker)
                 continue;
             }
             if(time()-$connection->lastsendtime>9){
-                foreach ($tcp_worker->connections as $connectionrow){
-                    $connectionrow->send(json_encode(['type'=>'sysmessage','text'=>$connection->username.'离开了会话'],JSON_UNESCAPED_UNICODE));
-                }
+
                 $connection->close();
             }
         }
