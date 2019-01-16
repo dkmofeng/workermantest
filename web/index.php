@@ -1,5 +1,5 @@
 <script>
-    var websocket=new WebSocket("ws://129.204.72.68:2347");
+    var websocket=new WebSocket("websocket://129.204.72.68:2347");
     websocket.onopen=function(e){
         console.log(e);
     }
