@@ -25,7 +25,7 @@
        }
     }
     function  send(data){
-
+        data=JSON.stringify(data)
         websocket.send(data+'/n');
     }
 </script>
