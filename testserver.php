@@ -4,7 +4,7 @@ require_once __DIR__ . '/Autoloader.php';
 use Workerman\Worker;
 use Workerman\Lib\Timer;
 
-$tcp_worker = new Worker("ws://0.0.0.0:2347");
+$tcp_worker = new Worker("Websocket://0.0.0.0:2347");
 
 // 启动4个进程对外提供服务
 $tcp_worker->count =2;
@@ -12,9 +12,7 @@ $tcp_worker->count =2;
 // 当客户端发来数据时
 $tcp_worker->onMessage = function($connection, $data)
 {
-    ob_start();
-    var_dump($data);
-    $connection->send(json_encode(['type'=>'sysmessage','text'=>ob_end_clean()]));
+    $message=json_decode($data,true);
     if(empty($data)||!is_array($message)){
         return false;
     }
