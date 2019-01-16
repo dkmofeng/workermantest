@@ -12,7 +12,7 @@ $tcp_worker->count =2;
 // 当客户端发来数据时
 $tcp_worker->onMessage = function($connection, $data)
 {
-
+    $data=str_replace('\n','',$data);
     $message=json_decode($data,true);
     ob_start();
     var_dump($message);
