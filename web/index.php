@@ -1,7 +1,8 @@
 <script>
      websocket=new WebSocket("ws://129.204.72.68:2347");
     websocket.onopen=function(e){
-        console.log(e);
+        console.log('open success ');
+        ping();
     }
     websocket.onmessage=function(e){
         console.log(e);
@@ -15,7 +16,7 @@
         console.log('ping log')
         setTimeout('ping()',10);
     }
-    ping();
+
     function sendmessage() {
        var txt= document.getElementById('text').value;
        if(txt!=''){
