@@ -19,13 +19,14 @@ $tcp_worker->onMessage = function($connection, $data)
     switch ($message['type']){
         case 'pong':
              $connection->lastsendtime=time();
-            $connectionrow->send(json_encode(['type'=>'sysmessage','text'=>$connection->lastsendtime]));
+            $connection->send(json_encode(['type'=>'sysmessage','text'=>$connection->lastsendtime]));
         break;
         case 'close':
-            $connection->close();
+
             foreach ($tcp_worker->connections as $connectionrow){
-                $connectionrow->send(json_encode(['type'=>'sysmessage','text'=>$connectionrow->username.'已经离开']));
+                $connectionrow->send(json_encode(['type'=>'sysmessage','text'=>$connection->username.'已经离开']));
             }
+            $connection->close();
             break;
         case 'login':
             $username=$message['username'];
@@ -78,7 +79,7 @@ $tcp_worker->onWorkerStart = function($worker)
                 continue;
             }
             if(time()-$connection->lastsendtime>60){
-                $connectionrow->send(json_encode(['type'=>'sysmessage','text'=>$connection->lastsendtime]));
+                $connection->send(json_encode(['type'=>'sysmessage','text'=>$connection->lastsendtime]));
                 $connection->close();
             }
         }
