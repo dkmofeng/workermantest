@@ -12,10 +12,11 @@ $tcp_worker->count =2;
 // 当客户端发来数据时
 $tcp_worker->onMessage = function($connection, $data)
 {
-    if(empty($data)||!is_array($data)){
+    $message=json_decode($data,true);
+    if(empty($data)||!is_array($message)){
         return false;
     }
-   $message=json_decode($data,true);
+
     switch ($message['type']){
         case 'pong':
              $connection->lastsendtime=time();
