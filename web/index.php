@@ -1,5 +1,5 @@
 <?php
-sesssion_start();
+session_start();
 $_SESSION['UID']=session_id();
 ?>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
