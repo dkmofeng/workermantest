@@ -1,4 +1,7 @@
-
+<?php
+sesssion_start();
+$_SESSION['UID']=session_id();
+?>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
     .sendbutton{width:90%;margin:10px 5%;background-color:red;color:#fff;}
@@ -13,7 +16,8 @@
      websocket=new WebSocket("ws://129.204.72.68:2347");
     websocket.onopen=function(e){
         console.log('open success ');
-		
+        var jsondata='{"type":"login","uid":"<?php echo $_SESSION['UID']; ?>"}';
+        send(jsondata)
         ping();
     }
     websocket.onmessage=function(e){
