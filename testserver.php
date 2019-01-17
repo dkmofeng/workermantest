@@ -56,7 +56,7 @@ $tcp_worker->onMessage = function($connection, $data)  use($tcp_worker)
 $tcp_worker->onConnect = function($connection) use($tcp_worker)
 {
     global $userlimit;
-	if(!empty($_SESSION['autocreateid'])){
+	if(empty($_SESSION['autocreateid'])){
 		$userlimit+=1;
 		$_SESSION['autocreateid']=$userlimit;
 	}

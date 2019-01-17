@@ -1,8 +1,10 @@
 <style>
     .sendbutton{width:90%;margin:10px 5%;background-color:red;color:#fff;}
     #text{width:100%;height:80px;border:1px solid #ccc;}
-    .messagebox{width:100%;width:100%;padding:10px;}
-    .messagetext{height:40px;line-height:40px;font-size:20px;}
+    #messagebox{width:100%;width:100%;padding:10px;margin-bottom:20px;}
+    
+	
+	#messagebox div{height:40px;line-height:40px;font-size:13px;}
 
 </style>
 <script>
