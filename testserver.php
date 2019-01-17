@@ -56,11 +56,16 @@ $tcp_worker->onMessage = function($connection, $data)  use($tcp_worker)
 $tcp_worker->onConnect = function($connection) use($tcp_worker)
 {
     global $userlimit;
-    $userlimit+=1;
-    $message=['type'=>'connect','status'=>1];
-    $connection->send(json_encode($message));
+	if(!empty($_SESSION['autocreateid'])){
+		$userlimit+=1;
+		$_SESSION['autocreateid']=$userlimit;
+	}
+    
     $connection->lastsendtime=time();
-    $connection->username='游客'.$userlimit;
+    $connection->username='游客'.$_SESSION['autocreateid'];
+	
+	$message=['type'=>'connect','status'=>1];
+	$connection->send(json_encode($message));
     foreach ($tcp_worker->connections as $connectionrow){
         $connectionrow->send(json_encode(['type'=>'sysmessage','text'=>$connection->username.'加入会话'],JSON_UNESCAPED_UNICODE));
     }
