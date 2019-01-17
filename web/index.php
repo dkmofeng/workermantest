@@ -25,6 +25,8 @@
 			messagerow.class='messagetext';
 			messagerow.innerHTML=data.text;
             box.appendChild(messagerow);
+        }else{
+            alert(data.text)
         }
 		
     }
