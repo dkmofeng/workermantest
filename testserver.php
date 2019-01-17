@@ -9,6 +9,8 @@ $tcp_worker = new Worker("Websocket://0.0.0.0:2347");
 // 启动4个进程对外提供服务
 $tcp_worker->count =2;
 
+$globalConnects=[];
+$globalUserGroup=[];
 // 当客户端发来数据时
 $tcp_worker->onMessage = function($connection, $data)  use($tcp_worker)
 {
@@ -19,6 +21,8 @@ $tcp_worker->onMessage = function($connection, $data)  use($tcp_worker)
     if(empty($data)||!is_array($message)){
         return false;
     }
+    global  $globalConnects;
+    global  $globalUserGroup;
 
     switch ($message['type']){
         case 'pong':
@@ -27,7 +31,7 @@ $tcp_worker->onMessage = function($connection, $data)  use($tcp_worker)
         break;
         case 'close':
 
-            foreach ($tcp_worker->connections as $connectionrow){
+            foreach ($globalConnects as $connectionrow){
 				
                 $connectionrow->send(json_encode(['type'=>'sysmessage','text'=>$connection->username.'已经离开'],JSON_UNESCAPED_UNICODE));
             }
@@ -38,9 +42,12 @@ $tcp_worker->onMessage = function($connection, $data)  use($tcp_worker)
 				$connection->send(json_encode(['type'=>'errmsg','text'=>'登录失败']));
 				$connection->close();
 			}
-			
+            global $userlimit;
+
 			 $connection->uid=$message['uid'];
-             global $userlimit;
+			 $connection->islogin=1;
+
+
 				if(empty($_SESSION[$message['uid']])){
 					$userlimit+=1;
 					$_SESSION[$message['uid']]='用户'.$userlimit;
@@ -50,10 +57,12 @@ $tcp_worker->onMessage = function($connection, $data)  use($tcp_worker)
 				
 				
 				$connection->lastsendtime=time();
-				
-				foreach ($tcp_worker->connections as $connectionrow){
+
+				foreach ($globalConnects as $connectionrow){
 					$connectionrow->send(json_encode(['type'=>'sysmessage','text'=>$connection->username.'加入会话'],JSON_UNESCAPED_UNICODE));
 				}
+            $globalConnects[$connection->id]=$connection;
+            $globalUserGroup[$connection->uid][$connection->id]=1;
             $connection->send(json_encode(['type'=>'sysmessage','text'=>'登陆成功'],JSON_UNESCAPED_UNICODE));
          break;
         case 'sayall':
@@ -63,7 +72,7 @@ $tcp_worker->onMessage = function($connection, $data)  use($tcp_worker)
 				$connection->close();
 				return false;
 			}
-            foreach ($tcp_worker->connections as $connectionrow){
+            foreach ($globalConnects as $connectionrow){
                 $connectionrow->send(json_encode(['type'=>'usermessage','text'=>$connection->username.'说:'.$messagetext],JSON_UNESCAPED_UNICODE));
             }
          break;
@@ -78,8 +87,9 @@ $tcp_worker->onMessage = function($connection, $data)  use($tcp_worker)
 // 当客户端发来数据时
 $tcp_worker->onConnect = function($connection) use($tcp_worker)
 {
-   
+
 	$message=['type'=>'connect','status'=>1];
+
 	$connection->send(json_encode($message));
     
 };
@@ -87,8 +97,9 @@ $tcp_worker->onConnect = function($connection) use($tcp_worker)
 $tcp_worker->onClose = function($connection) use($tcp_worker)
 {
 
+    global  $globalConnects;
 
-    foreach ($tcp_worker->connections as $connectionrow){
+    foreach ($globalConnects as $connectionrow){
         $connectionrow->send(json_encode(['type'=>'sysmessage','text'=>$connection->username.'退出会话'],JSON_UNESCAPED_UNICODE));
     }
 };
@@ -97,9 +108,11 @@ $tcp_worker->onWorkerStart = function($worker) use ($tcp_worker)
 {
 
     global $userlimit;
+    global  $globalConnects;
+
     $userlimit=0;
     Timer::add(3,function() {
-    $connections=$worker->connections;
+    $connections=$globalConnects;
     if(!empty($connections)){
         foreach($connections as $connection){
            // $message=['type'=>'ping'];
