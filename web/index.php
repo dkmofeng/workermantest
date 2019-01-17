@@ -16,7 +16,10 @@
         data=JSON.parse(e.data);
         if(data.type=='usermessage'){
             var box=document.getElementById('messagebox');
-            box.appendChild('<div class="messagetext">'+data.text+'</div>');
+			var messagerow = document.createElement("div");
+			messagerow.class='messagetext';
+			messagerow.innerHTML=data.text;
+            box.appendChild(messagerow);
 
         }
     }
