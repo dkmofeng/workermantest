@@ -1,3 +1,10 @@
+<style>
+    .sendbutton{width:90%;margin:10px 5%;background-color:red;color:#fff;}
+    #text{width:100%;height:80px;border:1px solid #ccc;}
+    .messagebox{width:100%;width:100%;padding:10px;}
+    .messagetext{height:40px;line-height:40px;font-size:20px;}
+
+</style>
 <script>
      websocket=new WebSocket("ws://129.204.72.68:2347");
     websocket.onopen=function(e){
@@ -6,6 +13,12 @@
     }
     websocket.onmessage=function(e){
         console.log(e);
+        data=JSON.parse(e.data);
+        if(data.type=='usermessage'){
+            var box=document.getElementById('messagebox');
+            box.appendChild('<div class="messagetext">'+data.text+'</div>');
+
+        }
     }
     websocket.onclose=function(e){
         console.log('已关闭连接！！')
@@ -30,6 +43,11 @@
     }
 </script>
 
-<input id="text">
+<div id="messagebox">
 
-<button onclick="sendmessage()">发送消息</button>
+</div>
+<div>
+    <textarea id="text"></textarea>
+</div>
+
+<button class="sendbutton" onclick="sendmessage()">发送消息</button>
