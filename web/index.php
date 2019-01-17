@@ -36,6 +36,7 @@
     function sendmessage() {
        var txt= document.getElementById('text').value;
        if(txt!=''){
+		   document.getElementById('text').value='';
            var jsondata='{"type":"sayall","message":"'+txt+'"}';
            send(jsondata)
        }
