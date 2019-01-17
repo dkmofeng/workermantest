@@ -1,3 +1,5 @@
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
     .sendbutton{width:90%;margin:10px 5%;background-color:red;color:#fff;}
     #text{width:100%;height:80px;border:1px solid #ccc;}
@@ -5,12 +7,13 @@
     
 	
 	#messagebox div{height:40px;line-height:40px;font-size:13px;}
-
+	
 </style>
 <script>
      websocket=new WebSocket("ws://129.204.72.68:2347");
     websocket.onopen=function(e){
         console.log('open success ');
+		
         ping();
     }
     websocket.onmessage=function(e){
@@ -22,8 +25,8 @@
 			messagerow.class='messagetext';
 			messagerow.innerHTML=data.text;
             box.appendChild(messagerow);
-
         }
+		
     }
     websocket.onclose=function(e){
         console.log('已关闭连接！！')

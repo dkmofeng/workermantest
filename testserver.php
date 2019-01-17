@@ -28,18 +28,41 @@ $tcp_worker->onMessage = function($connection, $data)  use($tcp_worker)
         case 'close':
 
             foreach ($tcp_worker->connections as $connectionrow){
+				
                 $connectionrow->send(json_encode(['type'=>'sysmessage','text'=>$connection->username.'已经离开'],JSON_UNESCAPED_UNICODE));
             }
             $connection->close();
             break;
         case 'login':
-            $username=$message['username'];
-            $connection->username=$username;
-            $connection->send(json_encode(['type'=>'sysmessage','text'=>'登陆成功','id'=>$connection->id],JSON_UNESCAPED_UNICODE));
+			if(empty($message['uid'])){
+				$connection->send(json_encode(['type'=>'errmsg','text'=>'登录失败']));
+				$connection->close();
+			}
+			
+			 $connection->uid=$message['uid'];
+             global $userlimit;
+				if(empty($_SESSION[$message['uid']])){
+					$userlimit+=1;
+					$_SESSION[$message['uid']]='用户'.$userlimit;
+				}
+				$connection->username=$_SESSION[$message['uid']];	
+					
+				
+				
+				$connection->lastsendtime=time();
+				
+				foreach ($tcp_worker->connections as $connectionrow){
+					$connectionrow->send(json_encode(['type'=>'sysmessage','text'=>$connection->username.'加入会话'],JSON_UNESCAPED_UNICODE));
+				}
+            $connection->send(json_encode(['type'=>'sysmessage','text'=>'登陆成功'],JSON_UNESCAPED_UNICODE));
          break;
         case 'sayall':
             $messagetext=$message['message'];
-
+			if(empty($connection->uid)){
+				$connection->send(json_encode(['type'=>'errmsg','text'=>'登录失败无法发送信息！！']));
+				$connection->close();
+				return false;
+			}
             foreach ($tcp_worker->connections as $connectionrow){
                 $connectionrow->send(json_encode(['type'=>'usermessage','text'=>$connection->username.'说:'.$messagetext],JSON_UNESCAPED_UNICODE));
             }
@@ -55,20 +78,10 @@ $tcp_worker->onMessage = function($connection, $data)  use($tcp_worker)
 // 当客户端发来数据时
 $tcp_worker->onConnect = function($connection) use($tcp_worker)
 {
-    global $userlimit;
-	if(empty($_SESSION['autocreateid'])){
-		$userlimit+=1;
-		$_SESSION['autocreateid']=$userlimit;
-	}
-    
-    $connection->lastsendtime=time();
-    $connection->username='游客'.$_SESSION['autocreateid'];
-	
+   
 	$message=['type'=>'connect','status'=>1];
 	$connection->send(json_encode($message));
-    foreach ($tcp_worker->connections as $connectionrow){
-        $connectionrow->send(json_encode(['type'=>'sysmessage','text'=>$connection->username.'加入会话'],JSON_UNESCAPED_UNICODE));
-    }
+    
 };
 
 $tcp_worker->onClose = function($connection) use($tcp_worker)
