@@ -59,7 +59,7 @@ $_SESSION['UID']=session_id();
     }
     function tobottom(){
         height=document.getElementById('messagebox').scrollHeight;
-        document.getElementById('messagebox').scrollHeight=height;
+        document.getElementById('messagebox').scrollTop=height;
     }
 </script>
 
