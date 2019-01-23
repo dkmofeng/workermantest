@@ -7,7 +7,7 @@ use Workerman\Lib\Timer;
 $tcp_worker = new Worker("Websocket://0.0.0.0:2347");
 
 // 启动4个进程对外提供服务
-$tcp_worker->count =2;
+$tcp_worker->count =1;
 
 $globalConnects=[];
 $globalUserGroup=[];

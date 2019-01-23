@@ -4,7 +4,7 @@ $_SESSION['UID']=session_id();
 ?>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-    .sendbutton{width:90%;margin:10px 5%;background-color:red;color:#fff;}
+    .sendbutton{width:90%;margin:10px 5%;background-color:red;color:#fff;height:50px;border:none;}
     #text{width:100%;height:80px;border:1px solid #ccc;}
     #messagebox{width:100%;height:400px;padding:10px;margin-bottom:20px;overflow-y: scroll;}
     
