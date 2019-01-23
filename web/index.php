@@ -51,8 +51,8 @@ $ran=date('i');
         tobottom()
     }
     function tobottom(){
-        $('#messagebox').scrollHeight;
-        $('#messagebox').scrollTop=$('#messagebox').scrollHeight;
+
+        $('#messagebox').scrollTop($('#messagebox').scrollHeight);
     }
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
