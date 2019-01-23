@@ -30,7 +30,7 @@ $_SESSION['UID']=session_id();
 			messagerow.innerHTML=data.text;
             box.appendChild(messagerow);
         }else{
-            alert(data.text)
+            console.log(data.text)
         }
 		
     }
