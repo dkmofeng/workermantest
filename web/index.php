@@ -55,6 +55,11 @@ $_SESSION['UID']=session_id();
     function  send(data){
        // console.log("websocket握手成功，发送登录数据:"+data);
         websocket.send(data);
+        tobottom()
+    }
+    function tobottom(){
+        height=document.getElementById('messagebox').scrollHeight;
+        document.getElementById('messagebox').scrollHeight=height;
     }
 </script>
 
