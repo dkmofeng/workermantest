@@ -17,7 +17,6 @@ $tcp_worker->onMessage = function($connection, $data)  use($tcp_worker)
     $message=json_decode($data,true);
 
 
-
     if(empty($data)||!is_array($message)){
         return false;
     }
