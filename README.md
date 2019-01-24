@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Workerman
 [![Gitter](https://badges.gitter.im/walkor/Workerman.svg)](https://gitter.im/walkor/Workerman?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge)
 [![Latest Stable Version](https://poser.pugx.org/workerman/workerman/v/stable)](https://packagist.org/packages/workerman/workerman)
@@ -601,3 +602,6 @@ Percentage of the requests served within a certain time (ms)
 ## LICENSE
 
 Workerman is released under the [MIT license](https://github.com/walkor/workerman/blob/master/MIT-LICENSE.txt).
+=======
+# workermantest
+>>>>>>> github/master

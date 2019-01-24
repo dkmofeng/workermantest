@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="17ce20d5-2703-4c9a-92da-dba64f5308fd" name="默认更改列表" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testserver.php" beforeDir="false" afterPath="$PROJECT_DIR$/testserver.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -163,12 +162,12 @@
       <workItem from="1547732076073" duration="634000" />
       <workItem from="1547733054655" duration="1354000" />
       <workItem from="1548251778470" duration="705000" />
-      <workItem from="1548341943427" duration="626000" />
+      <workItem from="1548341943427" duration="891000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25403000" />
+    <option name="totallyTimeSpent" value="25668000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
