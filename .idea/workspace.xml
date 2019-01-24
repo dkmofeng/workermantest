@@ -22,8 +22,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/testserver.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
-              <caret line="73" column="56" lean-forward="true" selection-start-line="73" selection-start-column="56" selection-end-line="73" selection-end-column="56" />
+            <state relative-caret-position="-169">
+              <caret line="71" column="21" selection-start-line="71" selection-start-column="21" selection-end-line="71" selection-end-column="21" />
               <folding>
                 <element signature="e#49#70#0#PHP" expanded="true" />
               </folding>
@@ -74,6 +74,7 @@
       <find>username</find>
       <find>login</find>
       <find>$globalUserGroup</find>
+      <find>$globalConnects</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -120,17 +121,6 @@
               <item name="workermantest" type="b2602c69:ProjectViewProjectNode" />
               <item name="workermantest" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="workermantest" type="b2602c69:ProjectViewProjectNode" />
-              <item name="workermantest" type="462c0819:PsiDirectoryNode" />
-              <item name="web" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="workermantest" type="b2602c69:ProjectViewProjectNode" />
-              <item name="workermantest" type="462c0819:PsiDirectoryNode" />
-              <item name="web" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -173,12 +163,12 @@
       <workItem from="1547732076073" duration="634000" />
       <workItem from="1547733054655" duration="1354000" />
       <workItem from="1548251778470" duration="705000" />
-      <workItem from="1548341943427" duration="232000" />
+      <workItem from="1548341943427" duration="626000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25072000" />
+    <option name="totallyTimeSpent" value="25403000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -190,9 +180,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="762" y="0" width="781" height="830" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4978903" visible="true" weight="0.20241287" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4978903" visible="true" weight="0.41770402" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.5021097" side_tool="true" weight="0.18632708" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -205,7 +195,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.3286119" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.3286119" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.40114614" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -254,8 +244,8 @@
     <entry file="file://$USER_HOME$/Desktop/gdapi/serve/controller.php" />
     <entry file="file://$PROJECT_DIR$/testserver.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="73" column="56" lean-forward="true" selection-start-line="73" selection-start-column="56" selection-end-line="73" selection-end-column="56" />
+        <state relative-caret-position="-169">
+          <caret line="71" column="21" selection-start-line="71" selection-start-column="21" selection-end-line="71" selection-end-column="21" />
           <folding>
             <element signature="e#49#70#0#PHP" expanded="true" />
           </folding>
